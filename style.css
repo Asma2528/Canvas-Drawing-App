@@ -1,0 +1,298 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family:'Lucida Sans', 'sans-serif';
+}
+
+body{
+    background: rgba(216, 196, 255, 0.854);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container{
+  display:flex;
+  width:100%;
+  max-width: 1050px;
+    gap:10px;
+    padding:10px;   
+ 
+}
+
+canvas{
+    width:100%;
+    height: 100%;
+    border-radius:6px;
+}
+
+.drawing-board{
+    background: #ffffff;
+    border-radius:6px;
+    flex:1;
+}
+
+.tools-board{
+    background: rgb(255, 255, 255);
+    width:220px;
+    padding:15px 20px 0;
+    border-radius:6px;
+}
+
+.tools-board .row{
+    margin-bottom:20px
+}
+
+.row .options{
+    list-style: none;
+    margin:10px 0 0 5px;
+}
+
+.row .options .option{
+    margin-bottom:10px;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.option :where(span,label){
+    padding-left:10px;
+    color:rgb(73, 73, 73);
+}
+
+/* The CSS :is() pseudo-class is a functional pseudo-class that takes a selector list as an argument and matches any element that can be selected by one of the selectors in that list. The :hover and .active pseudo-classes can be combined with :is() to apply styles when an element is in either of these states. */
+.option:is(:hover,.active) img{
+filter: invert(40%) sepia(50%) saturate(500%) hue-rotate(220deg) brightness(80%) contrast(200%);
+}
+
+.option:is(:hover,.active) :where(span,label){
+    color: rgb(112, 43, 216);
+    }
+
+
+.option #fill-color{
+    cursor:pointer;
+    height:15px;
+    width:18px;
+}
+
+.option #fill-color:is(:hover,.active){
+    color: rgb(112, 43, 216);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgb(109, 109, 110);
+    border-radius: 1px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:hover{
+    border-color: rgb(112, 43, 216);
+}
+
+input[type="checkbox"]:checked {
+    background-color: rgb(112, 43, 216);
+     border-color: rgb(112, 43, 216);
+}
+
+input[type="checkbox"]:checked::before {
+    content: '\2714'; /* Unicode character for a check mark */
+    display: block;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    line-height: 11px;
+}
+
+input[type="range"]{
+width:100%;
+height: 5px;
+margin-top:10px
+}
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+        -webkit-appearance: none;
+      overflow: hidden;
+      width: 200px;
+      background-color: rgb(185, 185, 185);
+     
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: rgb(112, 43, 216);
+      margin-top: -1px;
+    
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 7px;
+      -webkit-appearance: none;
+      border-radius: 50%;
+      height: 10px;
+      cursor: ew-resize;
+      background: #2c005f;
+      box-shadow: -80px 0 0 80px rgb(112, 43, 216);
+      cursor: pointer;
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: rgb(112, 43, 216);
+}
+input[type="range"]::-moz-range-track {  
+  background-color: rgb(185, 185, 185);
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: rgb(112, 43, 216);
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: rgb(185, 185, 185);
+}
+
+.colors .options{
+display:flex;
+justify-content: space-between;
+flex-wrap: wrap;
+gap:12px;
+}
+
+
+.row .options .option{
+    margin:2px;
+}
+
+/* The ::-webkit-color-swatch pseudo-element is a part of the WebKit rendering engine, which is used by browsers such as Google Chrome, Safari, and other WebKit-based browsers. It allows developers to style the color swatch (the square that displays the selected color) inside the input[type="color"] element. */
+input[type=color]::-webkit-color-swatch {
+    height:20px;
+    width:20px ;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+  }
+  
+  /*  It allows developers to style the wrapper that contains the color swatch within the color input element. */
+  input[type=color]::-webkit-color-swatch-wrapper {
+    height:20px;
+    width:20px ;
+      border-radius: 50%;
+      padding: 0;
+  }
+
+ /* .color-picker::before
+  {
+    position: absolute;
+    content:"";
+    top:50%;
+    left:50%;
+    height:12px;
+    width:12px;
+    background: inherit;
+    border-radius: 50%;
+    border:2px solid white;
+    transform:translate(-50%,-50%);
+  } */
+  .color-picker{
+    border: none;
+    outline:none;
+    background: none;
+    cursor: pointer;
+  }
+
+.colors .option{
+    height:20px;
+    width:20px ;
+    border-radius:50% ;
+    margin-top:3px;
+    position: relative;
+}
+
+
+  
+.colors .option.selected::before{
+    position: absolute;
+    content:"";
+    top:50%;
+    left:50%;
+    height:12px;
+    width:12px;
+    background: inherit;
+    border-radius: inherit;
+    border:2px solid white;
+    transform:translate(-50%,-50%);
+}
+
+.colors .option:first-child{
+    border:1px solid rgb(222, 218, 218);
+}
+
+.colors .option:first-child:hover::before{
+    border:2px solid rgb(222, 218, 218);
+}
+
+
+.colors .option:nth-child(1){
+    background-color: rgb(255,255,255);
+    }
+
+.colors .option:nth-child(2){
+    background-color: rgb(0, 0, 0);
+    }
+
+.colors .option:nth-child(3){
+    background-color: rgb(255, 0, 0);
+}
+
+.colors .option:nth-child(4){
+    background-color: rgb(0, 166, 255);
+}
+
+
+.colors .option:nth-child(5){
+    background-color: rgb(255, 242, 0);
+}
+
+
+
+.clear-btn, .save-btn{
+width:100%;
+color:rgb(70, 70, 70);
+border: none;
+outline: none;
+padding:10px 0;
+font-size: 0.9rem;
+margin-bottom: 12px;
+background: none;
+border-radius: 6px;
+cursor:pointer;
+}
+
+.clear-btn{
+    border: 2px solid rgb(155, 155, 155);
+}
+    
+.save-btn{
+    border: 2px solid rgb(112, 43, 216);
+    color:rgb(112, 43, 216);
+}
+
+.clear-btn:hover{
+    background-color: rgb(155, 155, 155);
+    color: #ffffff;
+}
+    
+.save-btn:hover{
+    background-color: rgb(112, 43, 216);
+    color: #ffffff;
+}
